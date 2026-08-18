@@ -265,3 +265,179 @@ print("Diámetro del vástago:", diametro_vastago_mm, "mm")
 print("\nFuerza de avance:", fuerza_avance, "N")
 print("Fuerza de retroceso:", fuerza_retroceso, "N")
 ```
+
+## B. Con interacción de consola (fprintf o disp) y teclado (input)
+
+**1.** Realice un programa que calcule la potencia que consume un circuito ingresando por teclado el valor de corriente y voltaje.
+
+### Solución (Código)
+
+```python
+print('Ingresa los valores de voltaje y corriente para calcular la potencia que consume un circuito')
+voltaje = float(input("Ingrese el valor de voltaje(V) \n") )
+corriente = float(input("Ingrese el valor de corriente(A) \n"))
+Potencia=voltaje*corriente
+print(f'La potencia con los valores ingresados es: {Potencia} w')
+```
+
+**2.** Realice un programa que calcule X números aleatorios en un rango determinado por el usuario.
+
+### Solución (Código)
+
+```python
+import random
+print("Generador numeros aleatorios")
+cantidad = int(input("¿Cuantos numeros desea generar?: "))
+minimo = int(input("Ingrese el valor minimo del rango: "))
+maximo = int(input("Ingrese el valor maximo del rango: "))
+numeros=[]
+for i in range(cantidad):
+    numero=random.randint(minimo,maximo)
+    numeros.append(numero)
+
+print("Los numero generados en los rangos dados son:\n")
+print(numeros)
+```
+
+**3.** Realice un programa para el cálculo de volúmenes (Prisma, Pirámide, Cono truncado, Cilindro) donde el usuario pueda seleccionar el sólido y los parámetros de cada volumen. 
+
+### Solución (Código)
+
+```python
+import math
+
+print("Seleccione el solido al cual desea saber el volumen")
+print("1. Prisma\n2. Piramida\n3 Cono truncado\n4.Cilindro\n")
+Solido=int(input("Seleccione el solido:\n"))
+
+if Solido == 1:
+    print("PRISMA")
+    area_base = float(input("Ingrese el area de la base: "))
+    altura = float(input("Ingrese la altura: "))
+    volumen = area_base * altura
+    print(f"El volumen del prisma es: {volumen}")
+elif Solido == 2:
+    print("PIRAMIDE")
+    area_base = float(input("Ingrese el area de la base: "))
+    altura = float(input("Ingrese la altura: "))
+    volumen = (area_base * altura) / 3
+    print(f"El volumen de la piramide es: {volumen}")
+elif Solido == 3:
+    print("CONO TRUNCADO")
+    radio_mayor = float(input("Ingrese el radio mayor: "))
+    radio_menor = float(input("Ingrese el radio menor: "))
+    altura = float(input("Ingrese la altura: "))
+    volumen = (math.pi * altura / 3) * (radio_mayor*2+radio_mayor*radio_menor+radio_menor*2)
+    print(f"El volumen del cono truncado es: {volumen}")
+elif Solido == 4:
+    print("CILINDRO")
+    radio = float(input("Ingrese el radio: "))
+    altura = float(input("Ingrese la altura: "))
+    volumen = math.pi * radio**2 * altura
+    print(f"El volumen del cilindro es: {volumen}")
+else :
+    print("Opcion invalida")
+```
+
+**4.** Realice un programa que le permita al usuario escoger entre robot Cilíndrico, Cartesiano y esférico, donde como respuesta a la selección conteste con el tipo y número de articulaciones que posee.
+
+### Solución (Código)
+
+```python
+print("Escoger entre robot Cilíndrico, Cartesiano y esférico:")
+print("1. Robot Cilindrico\n2. Robot Cartesiano\n3. Robot Esferico")
+
+Robot = int(input("Seleccione el tipo de robot: "))
+
+if Robot == 1:
+    print("\nRobot seleccionado: Cilindrico")
+    print("Numero de articulaciones: 3")
+    print("2 articulaciones prismaticas y 1 rotacional.")
+elif Robot == 2:
+    print("\nRobot seleccionado: Cartesiano")
+    print("Numero de articulaciones: 3")
+    print("3 articulaciones prismaticas.")
+elif Robot == 3:
+    print("\nRobot seleccionado: Esferico")
+    print("Numero de articulaciones: 3")
+    print("2 articulaciones rotacionales y 1 prismatica.")
+else:
+    print("Opcion invalida.")
+```
+
+**5.** Escribir un programa que realice la pregunta ¿Desea continuar Si/No? y que no deje de hacerla hasta que el usuario teclee No.
+
+### Solución (Código)
+
+```python
+while True:
+    res = input("¿Desea continuar Si/No? ")
+    res = res.lower()
+    if res == "si":
+        print("El programa continua\n")
+    elif res == "no":
+        print("Programa finalizado")
+        break
+    else:
+        print("Respuesta no valida. Escriba Si o No.\n")
+```
+
+## C.  Uso de las funciones para graficar
+
+**1.** Realice un programa que grafique el comportamiento de un sensor PT100 desde -200°C a 200°C.
+
+### Solución (Código)
+
+```python
+
+```
+
+**2.** Realice un programa que le permita al usuario ingresar los coeficientes de una función de transferencia de segundo orden y graficar su comportamiento, además se debe mostrar que tipo de sistema es: subamortiguado, criticamente amortiguado y sobreamortiguado.
+
+### Solución (Código)
+
+```python
+
+```
+
+**3.** Implemente la ecuación de carga y descarga para un circuito RC. El usuario ingresa por teclado el valor de voltaje (V), capacitancia (𝜇𝐹) y resistencia (Ω). Posteriormente realice en Python la gráfica.
+
+### Solución (Código)
+
+```python
+
+```
+
+**4.** Consulte y elabore un sistema coordenado X, Y y Z donde se dibuje un vector con coordenadas
+ingresadas por el usuario.
+
+
+### Solución (Código)
+
+```python
+
+```
+
+**1.** 
+
+### Solución (Código)
+
+```python
+
+```
+
+**1.** 
+
+### Solución (Código)
+
+```python
+
+```
+
+**1.** 
+
+### Solución (Código)
+
+```python
+
+```
