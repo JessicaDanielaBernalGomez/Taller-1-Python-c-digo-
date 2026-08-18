@@ -408,9 +408,7 @@ while True:
 
 ```
 
-**4.** Consulte y elabore un sistema coordenado X, Y y Z donde se dibuje un vector con coordenadas
-ingresadas por el usuario.
-
+**4.** Consulte y elabore un sistema coordenado X, Y y Z donde se dibuje un vector con coordenadas ingresadas por el usuario.
 
 ### Solución (Código)
 
@@ -418,7 +416,7 @@ ingresadas por el usuario.
 
 ```
 
-**1.** 
+**5.** Dibuje el nombre de cada uno de los integrantes del grupo en un plot en 2D, teniendo en cuenta líneas rectas y/o curvas.
 
 ### Solución (Código)
 
@@ -426,15 +424,7 @@ ingresadas por el usuario.
 
 ```
 
-**1.** 
-
-### Solución (Código)
-
-```python
-
-```
-
-**1.** 
+**6.** Obtenga las coordenadas X y Y de los contornos de dos logos de automóviles (Chevrolet, Hyundai, Mazda, etc.), a través de Python.
 
 ### Solución (Código)
 
