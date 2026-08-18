@@ -1,6 +1,14 @@
 # Taller 1 Python (código)
 E.P.1 Algoritmos de Robótica
 
+## Integrantes:
+
+Jessica Daniela Bernal Gómez - 120093
+
+Jorman Santiago Preciado Duque - 122828
+
+Danilo Rodriguez Malago - 119238
+
 ## A. Sin interacción de consola
 
 **1.** Realice un programa que sume, reste, multiplique (producto punto y producto cruz) y divida dos vectores previamente inicializados.
