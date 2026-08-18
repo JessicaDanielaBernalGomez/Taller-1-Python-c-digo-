@@ -150,10 +150,32 @@ import numpy as np
 R0 = 100
 A = 3.9083e-3
 B = -5.775e-7
-temperatura = 100
+C = -4.183e-12
+temperatura = -50
+
+def resistencia_pt100(temperatura):
+
+    # Rango: temperatura mayor o igual a 0 °C
+    if temperatura >= 0:
+
+        resistencia = R0 * (
+            1 + A * temperatura + B * temperatura**2
+        )
+
+    # Rango: temperatura menor a 0 °C
+    else:
+
+        resistencia = R0 * (
+            1
+            + A * temperatura
+            + B * temperatura**2
+            + C * (temperatura - 100) * temperatura**3
+        )
+
+    return resistencia
 
 # Cálculo de la resistencia
-resistencia = R0 * (1 + A * temperatura + B * temperatura**2)
+resistencia = resistencia_pt100(temperatura)
 
 # Mostrar resultado
 print("Sensor RTD PT100")
