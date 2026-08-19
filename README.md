@@ -454,7 +454,52 @@ plt.show()
 ### Solución (Código)
 
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal
 
+print("FUNCIÓN DE TRANSFERENCIA DE SEGUNDO ORDEN")
+
+K = float(input("Ingrese la ganancia K: "))
+a1 = float(input("Ingrese el coeficiente de s: "))
+a0 = float(input("Ingrese el término independiente: "))
+
+# Función de transferencia
+numerador = [K]
+denominador = [1, a1, a0]
+
+sistema = signal.TransferFunction(numerador, denominador)
+
+# Polos
+polos = np.roots(denominador)
+
+print("\nPolos del sistema:")
+print(polos)
+
+# Determinar tipo de sistema
+discriminante = a1**2 - 4*a0
+
+if discriminante < 0:
+    tipo = "SUBAMORTIGUADO"
+elif discriminante == 0:
+    tipo = "CRÍTICAMENTE AMORTIGUADO"
+else:
+    tipo = "SOBREAMORTIGUADO"
+
+print("\nTipo de sistema:", tipo)
+
+# Respuesta al escalón
+tiempo, respuesta = signal.step(sistema)
+
+plt.figure(figsize=(9, 5))
+plt.plot(tiempo, respuesta)
+
+plt.title("Respuesta al escalón - " + tipo)
+plt.xlabel("Tiempo (s)")
+plt.ylabel("Amplitud")
+plt.grid(True)
+
+plt.show()
 ```
 
 **3.** Implemente la ecuación de carga y descarga para un circuito RC. El usuario ingresa por teclado el valor de voltaje (V), capacitancia (𝜇𝐹) y resistencia (Ω). Posteriormente realice en Python la gráfica.
@@ -462,7 +507,52 @@ plt.show()
 ### Solución (Código)
 
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal
 
+print("FUNCIÓN DE TRANSFERENCIA DE SEGUNDO ORDEN")
+
+K = float(input("Ingrese la ganancia K: "))
+a1 = float(input("Ingrese el coeficiente de s: "))
+a0 = float(input("Ingrese el término independiente: "))
+
+# Función de transferencia
+numerador = [K]
+denominador = [1, a1, a0]
+
+sistema = signal.TransferFunction(numerador, denominador)
+
+# Polos
+polos = np.roots(denominador)
+
+print("\nPolos del sistema:")
+print(polos)
+
+# Determinar tipo de sistema
+discriminante = a1**2 - 4*a0
+
+if discriminante < 0:
+    tipo = "SUBAMORTIGUADO"
+elif discriminante == 0:
+    tipo = "CRÍTICAMENTE AMORTIGUADO"
+else:
+    tipo = "SOBREAMORTIGUADO"
+
+print("\nTipo de sistema:", tipo)
+
+# Respuesta al escalón
+tiempo, respuesta = signal.step(sistema)
+
+plt.figure(figsize=(9, 5))
+plt.plot(tiempo, respuesta)
+
+plt.title("Respuesta al escalón - " + tipo)
+plt.xlabel("Tiempo (s)")
+plt.ylabel("Amplitud")
+plt.grid(True)
+
+plt.show()
 ```
 
 **4.** Consulte y elabore un sistema coordenado X, Y y Z donde se dibuje un vector con coordenadas ingresadas por el usuario.
@@ -470,7 +560,46 @@ plt.show()
 ### Solución (Código)
 
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
 
+print("CIRCUITO RC - CARGA Y DESCARGA")
+
+V = float(input("Ingrese el voltaje (V): "))
+C_micro = float(input("Ingrese la capacitancia (uF): "))
+R = float(input("Ingrese la resistencia (ohm): "))
+
+# Convertir microfaradios a faradios
+C = C_micro * 1e-6
+
+# Constante de tiempo
+tau = R * C
+
+print("\nConstante de tiempo:")
+print("Tau =", tau, "segundos")
+
+# Tiempo de simulación
+t = np.linspace(0, 5*tau, 1000)
+
+# Carga
+Vc_carga = V * (1 - np.exp(-t/tau))
+
+# Descarga
+Vc_descarga = V * np.exp(-t/tau)
+
+# Gráfica
+plt.figure(figsize=(9, 5))
+
+plt.plot(t, Vc_carga, label="Carga")
+plt.plot(t, Vc_descarga, label="Descarga")
+
+plt.title("Carga y descarga de un circuito RC")
+plt.xlabel("Tiempo (s)")
+plt.ylabel("Voltaje del capacitor (V)")
+plt.grid(True)
+plt.legend()
+
+plt.show()
 ```
 
 **5.** Dibuje el nombre de cada uno de los integrantes del grupo en un plot en 2D, teniendo en cuenta líneas rectas y/o curvas.
