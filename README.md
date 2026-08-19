@@ -411,7 +411,42 @@ while True:
 ### Solución (Código)
 
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
 
+R0 = 100
+A = 3.9083e-3
+B = -5.775e-7
+C = -4.183e-12
+
+T = np.linspace(-200, 200, 1000)
+
+R = []
+
+for temperatura in T:
+    if temperatura >= 0:
+        resistencia = R0 * (
+            1 + A * temperatura + B * temperatura**2
+        )
+    else:
+        resistencia = R0 * (
+            1
+            + A * temperatura
+            + B * temperatura**2
+            + C * (temperatura - 100) * temperatura**3
+        )
+
+    R.append(resistencia)
+
+plt.figure(figsize=(9, 5))
+plt.plot(T, R)
+
+plt.title("Comportamiento de un sensor PT100")
+plt.xlabel("Temperatura (°C)")
+plt.ylabel("Resistencia (Ohm)")
+plt.grid(True)
+
+plt.show()
 ```
 
 **2.** Realice un programa que le permita al usuario ingresar los coeficientes de una función de transferencia de segundo orden y graficar su comportamiento, además se debe mostrar que tipo de sistema es: subamortiguado, criticamente amortiguado y sobreamortiguado.
