@@ -462,9 +462,8 @@ print("FUNCIÓN DE TRANSFERENCIA DE SEGUNDO ORDEN")
 
 K = float(input("Ingrese la ganancia K: "))
 a1 = float(input("Ingrese el coeficiente de s: "))
-a0 = float(input("Ingrese el término independiente: "))
+a0 = float(input("Ingrese Factor de amortiguamiento: "))
 
-# Función de transferencia
 numerador = [K]
 denominador = [1, a1, a0]
 
