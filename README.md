@@ -781,5 +781,81 @@ plt.show()
 ### Solución (Código)
 
 ```python
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+from google.colab import drive
+drive.mount('/content/drive')
 
+def obtener_contorno(ruta_imagen, nombre):
+
+    img = cv2.imread(ruta_imagen)
+
+    if img is None:
+        print(f"No se pudo abrir: {ruta_imagen}")
+        return None
+    gris = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    gris = cv2.GaussianBlur(gris, (5, 5), 0)
+    _, binaria = cv2.threshold(
+        gris,
+        0,
+        255,
+        cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU
+    )
+    contornos, jerarquia = cv2.findContours(
+        binaria,
+        cv2.RETR_EXTERNAL,
+        cv2.CHAIN_APPROX_NONE
+    )
+    if len(contornos) == 0:
+        print(f"No se encontraron contornos en {nombre}")
+        return None
+    contorno = max(contornos, key=cv2.contourArea)
+    coordenadas = contorno.reshape(-1, 2)
+
+    print(f"\n{nombre}")
+    print("Número de puntos:", len(coordenadas))
+    print("Primeras coordenadas X,Y:")
+    print(coordenadas[:20])
+    np.savetxt(
+        f"{nombre}_coordenadas.csv",
+        coordenadas,
+        delimiter=",",
+        header="X,Y",
+        comments="",
+        fmt="%d"
+    )
+
+    print(f"Archivo guardado: {nombre}_coordenadas.csv")
+
+    alto, ancho = gris.shape
+
+    imagen_contorno = np.zeros(
+        (alto, ancho),
+        dtype=np.uint8
+    )
+    cv2.drawContours(
+        imagen_contorno,
+        [contorno],
+        -1,
+        255,
+        2
+    )
+    plt.figure(figsize=(8, 6))
+    plt.imshow(imagen_contorno, cmap="gray")
+    plt.title(f"Contorno - {nombre}")
+    plt.axis("off")
+    plt.show()
+
+    return coordenadas
+
+chevrolet = obtener_contorno(
+    "/content/image.png",
+    "Chevrolet"
+)
+
+renault = obtener_contorno(
+    "/content/image2.png",
+    "Renault"
+)
 ```
