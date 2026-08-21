@@ -456,47 +456,84 @@ plt.show()
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy import signal
 
-print("FUNCIÓN DE TRANSFERENCIA DE SEGUNDO ORDEN")
+K = float(input("Ingrese K: "))
+wn = float(input("Ingrese wn: "))
+zita = float(input("Ingrese zita: "))
 
-K = float(input("Ingrese la ganancia K: "))
-a1 = float(input("Ingrese el coeficiente de s: "))
-a0 = float(input("Ingrese Factor de amortiguamiento: "))
+numerador = K * wn**2
 
-numerador = [K]
-denominador = [1, a1, a0]
+a1 = 2 * zita * wn
+a0 = wn**2
 
-sistema = signal.TransferFunction(numerador, denominador)
 
-# Polos
-polos = np.roots(denominador)
 
-print("\nPolos del sistema:")
-print(polos)
+if zita > 0 and zita < 1:
 
-# Determinar tipo de sistema
-discriminante = a1**2 - 4*a0
-
-if discriminante < 0:
     tipo = "SUBAMORTIGUADO"
-elif discriminante == 0:
-    tipo = "CRÍTICAMENTE AMORTIGUADO"
-else:
+
+elif zita == 1:
+
+    tipo = "CRITICAMENTE AMORTIGUADO"
+
+elif zita > 1:
+
     tipo = "SOBREAMORTIGUADO"
 
-print("\nTipo de sistema:", tipo)
+else:
 
-# Respuesta al escalón
-tiempo, respuesta = signal.step(sistema)
+    tipo = "INESTABLE"
 
-plt.figure(figsize=(9, 5))
-plt.plot(tiempo, respuesta)
+print("\nFactor de amortiguamiento:", zita)
+print("Tipo de sistema:", tipo)
 
-plt.title("Respuesta al escalón - " + tipo)
-plt.xlabel("Tiempo (s)")
-plt.ylabel("Amplitud")
-plt.grid(True)
+t = np.linspace(0, 10 / wn, 1000)
+
+if zita > 0 and zita < 1:
+
+    wd = wn * np.sqrt(1 - zita**2)
+
+    y = K * (
+        1
+        - np.exp(-zita * wn * t)
+        * (
+            np.cos(wd * t)
+            + (zita / np.sqrt(1 - zita**2))
+            * np.sin(wd * t)
+        )
+    )
+
+elif zita == 1:
+
+    y = K * (
+        1 - np.exp(-wn * t) * (1 + wn * t)
+    )
+
+elif zita > 1:
+
+    p1 = -wn * (zita - np.sqrt(zita**2 - 1))
+    p2 = -wn * (zita + np.sqrt(zita**2 - 1))
+
+    y = K * (
+        1
+        + (p2 * np.exp(p1 * t) - p1 * np.exp(p2 * t))
+        / (p1 - p2)
+    )
+
+else:
+
+    y = np.zeros(len(t))
+
+plt.plot(t, y)
+
+plt.axhline(K, linestyle="--", label="Valor final")
+
+plt.title("Respuesta al escalón")
+plt.xlabel("Tiempo [s]")
+plt.ylabel("Salida")
+
+plt.grid()
+plt.legend()
 
 plt.show()
 ```
