@@ -778,6 +778,10 @@ plt.show()
 
 **6.** Obtenga las coordenadas X y Y de los contornos de dos logos de automóviles (Chevrolet, Hyundai, Mazda, etc.), a través de Python.
 
+![Logo Chevrolet](image.png)
+
+![Logo Renault](image2.png)
+
 ### Solución (Código)
 
 ```python
